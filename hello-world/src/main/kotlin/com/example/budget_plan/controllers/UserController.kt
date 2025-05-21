@@ -1,10 +1,12 @@
 package com.example.budget_plan.controllers
 
+import com.example.budget_plan.model.Role
 import com.example.budget_plan.model.User
 import com.example.budget_plan.repositories.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.*
 import com.example.budget_plan.repositories.RoleRepository
+import org.springframework.security.access.prepost.PreAuthorize
 
 
 @Service
@@ -22,7 +24,7 @@ class UserService(
     fun createUser(user: User, roleName: String): User {
         val role = roleRepository.findByRoleName(roleName)
             ?: throw RuntimeException("Role not found: $roleName")
-        val userWithRole = user.copy(role = role)
+        val userWithRole = user.copy(roles = setOf(role))
         return userRepository.save(userWithRole)
     }
 
@@ -36,7 +38,7 @@ class UserService(
             mail = updatedUser.mail,
             passwordHash = updatedUser.passwordHash,
             //accountCreationDate = updatedUser.accountCreationDate,
-            role = role
+            roles = setOf(role)
         )
         return userRepository.save(updated)
     }
@@ -60,14 +62,18 @@ class UserController(private val userService: UserService) {
     @GetMapping("/{id}")
     fun getUserById(@PathVariable id: Long) = userService.getUserById(id)
 
+    @PreAuthorize("hasRole('PREMIUM')")
     @PostMapping
     fun createUser(@RequestBody user: User, @RequestParam roleName: String) =
         userService.createUser(user, roleName)
+
+    @PreAuthorize("hasRole('PREMIUM')")
 
     @PutMapping("/{id}")
     fun updateUser(@PathVariable id: Long, @RequestBody user: User, @RequestParam roleName: String) =
         userService.updateUser(id, user, roleName)
 
+    @PreAuthorize("hasRole('PREMIUM')")
     @DeleteMapping("/{id}")
     fun deleteUser(@PathVariable id: Long) = userService.deleteUser(id)
 }

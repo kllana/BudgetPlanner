@@ -20,9 +20,9 @@ data class User(
     @Column(name = "password_hash", nullable = false)
     val passwordHash: String,
 
-    @ManyToOne
+  /*  @ManyToOne
     @JoinColumn(name = "id_role", nullable = false)
-    val role: Role? = null,
+    val role: Role? = null,*/
 
     @OneToOne
     @JoinColumn(name = "last_login_id")
@@ -32,7 +32,7 @@ data class User(
     @JoinTable(
         name = "user_roles", // таблица для связи между пользователями и ролями
         joinColumns = [JoinColumn(name = "user_id")],
-        inverseJoinColumns = [JoinColumn(name = "role_id")]
+        inverseJoinColumns = [JoinColumn(name = "id_role")]
     )
     val roles: Set<Role> = emptySet()
 

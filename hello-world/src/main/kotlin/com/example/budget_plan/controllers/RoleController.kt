@@ -5,6 +5,7 @@ import com.example.budget_plan.repositories.RoleRepository
 import org.springframework.stereotype.Service
 import java.util.*
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @Service
@@ -50,14 +51,14 @@ class RoleService(private val roleRepository: RoleRepository) {
 @RequestMapping("roles")
 class RoleController(private val roleService: RoleService) {
 
-    // Получить все роли
+    @PreAuthorize("hasRole('PREMIUM')")
     @GetMapping
     fun getAllRoles(): ResponseEntity<List<Role>> {
         val roles = roleService.getAllRoles()
         return ResponseEntity.ok(roles)
     }
 
-    // Найти роль по ID
+    @PreAuthorize("hasRole('PREMIUM')")
     @GetMapping("/{id}")
     fun getRoleById(@PathVariable id: Long): ResponseEntity<Role> {
         val role = roleService.getRoleById(id)
@@ -65,14 +66,14 @@ class RoleController(private val roleService: RoleService) {
             .orElse(ResponseEntity.notFound().build())
     }
 
-    // Создать новую роль
+    @PreAuthorize("hasRole('PREMIUM')")
     @PostMapping
     fun createRole(@RequestBody role: Role): ResponseEntity<Role> {
         val newRole = roleService.createRole(role)
         return ResponseEntity.ok(newRole)
     }
 
-    // Обновить существующую роль
+    @PreAuthorize("hasRole('PREMIUM')")
     @PutMapping("/{id}")
     fun updateRole(
         @PathVariable id: Long,
@@ -86,7 +87,7 @@ class RoleController(private val roleService: RoleService) {
         }
     }
 
-    // Удалить роль
+    @PreAuthorize("hasRole('PREMIUM')")
     @DeleteMapping("/{id}")
     fun deleteRole(@PathVariable id: Long): ResponseEntity<Void> {
         return try {

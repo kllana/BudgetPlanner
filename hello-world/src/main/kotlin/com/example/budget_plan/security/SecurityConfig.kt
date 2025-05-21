@@ -78,8 +78,8 @@ class SecurityConfig(
     fun clientRegistrationRepository(): ClientRegistrationRepository {
         return InMemoryClientRegistrationRepository(
             ClientRegistration.withRegistrationId("yandex")
-                .clientId("453f2e4825e64309b2386acbc6d5200d")
-                .clientSecret("6d8a391cfa384c388de3d46534541c64")
+                .clientId("84136536f6a147749415199276a1c4be")
+                .clientSecret("ccdc5033d5ca4226be72aaa6b8b135e1")
                 .scope("login:info")
                 .userNameAttributeName("login")
                 .authorizationUri("https://oauth.yandex.ru/authorize")
@@ -143,7 +143,7 @@ class SecurityConfig(
 
                         println("SecurityContext обновлён: ${SecurityContextHolder.getContext().authentication}")
 
-                        response.sendRedirect("/")
+                        response.sendRedirect("/hello")
                     }
 
 
