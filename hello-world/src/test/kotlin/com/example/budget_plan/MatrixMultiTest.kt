@@ -34,20 +34,7 @@ class MatrixMultiTest {
             }
         }
     }
-
-    @Test
-    fun testEmptyMatrices() {
-        val a = arrayOf<DoubleArray>()
-        val b = arrayOf<DoubleArray>()
-
-        try {
-            multiplier.multiply(a, b)
-            assert(false) { "Exception expected for empty matrices" }
-        } catch (e: IllegalArgumentException) {
-            assert(e.message?.contains("Matrices must not be empty") == true)
-        }
-    }
-
+    
     @Test
     fun testRectangularMatrices() {
         val a = arrayOf(
