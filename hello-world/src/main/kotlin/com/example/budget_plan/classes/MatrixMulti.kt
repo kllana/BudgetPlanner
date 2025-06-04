@@ -2,6 +2,9 @@ package com.example.budget_plan.classes
 
 class MatrixMulti {
     fun multiply(a: Array<DoubleArray>, b: Array<DoubleArray>): Array<DoubleArray> {
+        require(a.isNotEmpty() && a[0].isNotEmpty()) { "Matrix A must not be empty" }
+        require(b.isNotEmpty() && b[0].isNotEmpty()) { "Matrix B must not be empty" }
+
         val rowsA = a.size
         val colsA = a[0].size
         val rowsB = b.size
