@@ -25,7 +25,6 @@ jobs:
         run: mvn clean verify
 
       - name: Запуск unit-тестов
-        working-directory: hello-world
         run: mvn clean test -D surefire.printSummary=true -X
 
       - name: Сохранить отчёт о тестах
