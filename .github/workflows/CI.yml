@@ -21,10 +21,10 @@ jobs:
           java-version: '17'
 
       - name: Сборка проекта с Maven
-        working-directory: hello-world
-        run: mvn clean verify
+        run: mvn -f hello-world/pom.xml clean verify
 
       - name: Запуск unit-тестов
+        working-directory: hello-world
         run: mvn clean test -D surefire.printSummary=true -X
 
       - name: Сохранить отчёт о тестах
