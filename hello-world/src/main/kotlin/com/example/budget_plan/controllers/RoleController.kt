@@ -11,22 +11,18 @@ import org.springframework.web.bind.annotation.*
 @Service
 class RoleService(private val roleRepository: RoleRepository) {
 
-    // Получить все роли
     fun getAllRoles(): List<Role> {
         return roleRepository.findAll()
     }
 
-    // Найти роль по ID
     fun getRoleById(id: Long): Optional<Role> {
         return roleRepository.findById(id)
     }
 
-    // Создать новую роль
     fun createRole(role: Role): Role {
         return roleRepository.save(role)
     }
 
-    // Обновить существующую роль
     fun updateRole(id: Long, updatedRole: Role): Role {
         val existingRole = roleRepository.findById(id).orElseThrow {
             IllegalArgumentException("Role with id $id not found")
@@ -35,7 +31,6 @@ class RoleService(private val roleRepository: RoleRepository) {
         return roleRepository.save(newRole)
     }
 
-    // Удалить роль
     fun deleteRole(id: Long) {
         if (roleRepository.existsById(id)) {
             roleRepository.deleteById(id)

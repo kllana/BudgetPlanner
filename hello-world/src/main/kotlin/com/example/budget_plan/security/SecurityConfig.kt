@@ -85,7 +85,7 @@ class SecurityConfig(
                 .authorizationUri("https://oauth.yandex.ru/authorize")
                 .tokenUri("https://oauth.yandex.ru/token")
                 .userInfoUri("https://login.yandex.ru/info")
-                .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
+                .redirectUri("http://localhost:8080/login/oauth2/code/yandex")
                 .clientName("Yandex")
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .build()

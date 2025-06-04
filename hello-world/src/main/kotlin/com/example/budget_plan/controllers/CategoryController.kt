@@ -48,13 +48,15 @@ class CategoryController(private val categoryService: CategoryService) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAuthority('ROLE_PREMIUM')")  // Только для пользователей с премиум-доступом
+
     fun createCategory(@RequestBody category: Category): Category = categoryService.createCategory(category)
 
+    @PreAuthorize("hasRole('PREMIUM')")
     @PutMapping("/{id}")
     fun updateCategory(@PathVariable id: Int, @RequestBody updatedCategory: Category): Category =
         categoryService.updateCategory(id, updatedCategory)
 
+    @PreAuthorize("hasRole('PREMIUM')")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteCategory(@PathVariable id: Int) = categoryService.deleteCategory(id)
