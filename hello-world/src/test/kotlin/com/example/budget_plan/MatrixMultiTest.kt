@@ -34,7 +34,7 @@ class MatrixMultiTest {
             }
         }
     }
-    
+
     @Test
     fun testRectangularMatrices() {
         val a = arrayOf(
