@@ -21,9 +21,9 @@ jobs:
           java-version: '17'
 
       - name: Сборка проекта с Maven
-        working-directory: ./BudgetPlanner/hello-world  # <-- укажи путь до папки с pom.xml
+        working-directory: hello-world
         run: mvn clean verify
-        
+
       - name: Запуск unit-тестов
         run: mvn clean test -D surefire.printSummary=true -X
 
