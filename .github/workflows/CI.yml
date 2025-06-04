@@ -29,9 +29,8 @@ jobs:
         run: mvn clean test -D surefire.printSummary=true -X
 
       - name: Сохранить отчёт о тестах
-        working-directory: hello-world
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: target/surefire-reports
+          path: hello-world/target/surefire-reports
