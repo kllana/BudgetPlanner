@@ -36,6 +36,65 @@ class MatrixMultiTest {
     }
 
     @Test
+    fun testEmptyMatrices() {
+        val a = arrayOf<DoubleArray>()
+        val b = arrayOf<DoubleArray>()
+
+        try {
+            multiplier.multiply(a, b)
+            assert(false) { "Exception expected for empty matrices" }
+        } catch (e: IllegalArgumentException) {
+            assert(e.message?.contains("Matrices must not be empty") == true)
+        }
+    }
+
+    @Test
+    fun testRectangularMatrices() {
+        val a = arrayOf(
+            doubleArrayOf(1.0, 2.0, 3.0)
+        )
+
+        val b = arrayOf(
+            doubleArrayOf(4.0),
+            doubleArrayOf(5.0),
+            doubleArrayOf(6.0)
+        )
+
+        val expected = arrayOf(doubleArrayOf(32.0))
+
+        val result = multiplier.multiply(a, b)
+
+        assertEquals(expected[0][0], result[0][0], 0.01, "Mismatch for rectangular matrices")
+    }
+
+    @Test
+    fun testResultWithZeros() {
+        val a = arrayOf(
+            doubleArrayOf(1.0, 2.0),
+            doubleArrayOf(3.0, 4.0)
+        )
+
+        val b = arrayOf(
+            doubleArrayOf(0.0, 0.0),
+            doubleArrayOf(0.0, 0.0)
+        )
+
+        val expected = arrayOf(
+            doubleArrayOf(0.0, 0.0),
+            doubleArrayOf(0.0, 0.0)
+        )
+
+        val result = multiplier.multiply(a, b)
+
+        for (i in expected.indices) {
+            for (j in expected[i].indices) {
+                assertEquals(expected[i][j], result[i][j], 0.01, "Mismatch at [$i][$j]")
+            }
+        }
+    }
+
+
+    @Test
     fun testIncorrectMultiplier() {
         val a = arrayOf(
             doubleArrayOf(1.0, 2.0)
