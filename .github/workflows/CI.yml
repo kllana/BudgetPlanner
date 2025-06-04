@@ -14,7 +14,7 @@ jobs:
       - name: Клонирование репозитория
         uses: actions/checkout@v3
 
-      - name: Установка Java 17
+      - name: Установк Java 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
