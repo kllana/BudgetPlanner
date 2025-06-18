@@ -12,4 +12,3 @@ class BudgetPlanApplication
 fun main(args: Array<String>) {
 	runApplication<com.example.budget_plan.BudgetPlanApplication>(*args)
 }
-	
