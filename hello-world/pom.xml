@@ -13,9 +13,11 @@
 	<distributionManagement>
 		<repository>
 			<id>github</id>
+			<name>GitHub kllana Apache Maven Packages</name>
 			<url>https://maven.pkg.github.com/kllana/BudgetPlanner</url>
 		</repository>
 	</distributionManagement>
+
 
 	<groupId>com.example</groupId>
 	<artifactId>hello-world</artifactId>
