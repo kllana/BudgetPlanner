@@ -35947,3 +35947,4 @@ Unconditional classes:
 2025-06-18 15:37:19 DEBUG [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{35, 32, 84, 89, 80, 69, 32, 97, 112, 112, 108, 105, 99, 97, 116, 105, 111, 110, 95, 114, 101, 97, 1 (truncated)...]
 2025-06-18 15:37:19 DEBUG [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed 200 OK
 2025-06-18 15:37:19 DEBUG [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-06-18 16:59:37 WARN  [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m55s825ms598µs600ns).
