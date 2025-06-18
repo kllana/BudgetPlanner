@@ -32,7 +32,7 @@ jobs:
 
       # Публикация артефактов в GitHub Packages
       - name: Публикация в GitHub Packages
-        run: mvn deploy --settings .github/maven-settings.xml
+        run: mvn deploy --settings ../.github/maven-settings.xml
         env:
           GH_USERNAME: ${{ secrets.GH_USERNAME }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
