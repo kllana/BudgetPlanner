@@ -22,35 +22,33 @@ jobs:
 
       # Этот шаг необходим, чтобы подготовить локальный репозиторий, например, для зависимостей
       - name: Сборка проекта с пропуском тестов
-        working-directory: hello-world
         run: mvn clean install -DskipTests=true
+        working-directory: hello-world
 
       # Запуск тестов (без чистки, чтобы сохранить собранные артефакты)
       - name: Запуск unit-тестов
-        working-directory: hello-world
         run: mvn test -D surefire.printSummary=true -X
+        working-directory: hello-world
 
       # Публикация артефактов в GitHub Packages
       - name: Публикация в GitHub Packages
-        working-directory: hello-world
         run: mvn deploy --settings .github/maven-settings.xml
         env:
           GH_USERNAME: ${{ secrets.GH_USERNAME }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        working-directory: hello-world
 
       # Сохранение отчёта о тестах как артефакт workflow
       - name: Сохранить отчёт о тестах
-        working-directory: hello-world
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: target/surefire-reports
+          path: hello-world/target/surefire-reports
 
       # Сохранение собранных артефактов (jar, war и др.)
       - name: Сохранить собранные артефакты
-        working-directory: hello-world
         uses: actions/upload-artifact@v4
         with:
           name: built-artifacts
-          path: target/*.jar
+          path: hello-world/target/*.jar
