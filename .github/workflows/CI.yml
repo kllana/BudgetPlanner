@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Этот шаг необходим, чтобы подготовить локальный репозиторий, например, для зависимостей
+
       - name: Сборка проекта с пропуском тестов
         run: mvn clean install -DskipTests=true
         working-directory: hello-world
