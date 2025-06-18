@@ -5,7 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertTrue
 
 class BudgetTest {
-
+// расчет остатка бюджета работает правильно.
     @Test
     fun `calculate remaining budget should return correct value`() {
         val initialBudget = 10_000
@@ -16,7 +16,7 @@ class BudgetTest {
 
         assertEquals(9_000, remainingBudget, "Ожидаемый остаток бюджета: 9,000")
     }
-
+//правильно определяет превышение бюджета.
     @Test
     fun `exceeding budget should trigger warning`() {
         val initialBudget = 5_000
@@ -35,7 +35,7 @@ class BudgetTest {
     private fun checkBudgetExceedance(budget: Int, expenses: Int): Boolean {
         return expenses > budget
     }
-
+//расчет остатка бюджета, если начальный бюджет равен нулю.
     @Test
     fun `calculate with zero initial budget`() {
         val initialBudget = 0
@@ -46,7 +46,7 @@ class BudgetTest {
 
         assertEquals(-500, remainingBudget, "Ожидаемый остаток бюджета: -500")
     }
-
+// расчет бюджета, если начальный бюджет отрицательный.
     @Test
     fun `negative initial budget calculation`() {
         val initialBudget = -5_000
@@ -57,7 +57,7 @@ class BudgetTest {
 
         assertEquals(-6_000, remainingBudget, "Ожидаемый остаток бюджета: -6,000")
     }
-
+//расчет остатка, если расходы равны начальному бюджету.
     @Test
     fun `expenses equal to budget`() {
         val initialBudget = 5_000

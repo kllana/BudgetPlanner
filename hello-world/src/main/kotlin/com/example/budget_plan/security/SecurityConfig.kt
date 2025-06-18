@@ -109,7 +109,7 @@ class SecurityConfig(
             .csrf { it.disable() }
             .authorizeHttpRequests { auth ->
                 auth
-                    .requestMatchers(HttpMethod.GET, "/login", "/logout", "/error").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/login", "/logout", "/error", "/metrics", "/actuator/prometheus").permitAll()
                     .requestMatchers(HttpMethod.POST, "/auth/login",  "/logout", "/auth/refresh").permitAll()
                     .anyRequest().authenticated()
             }
@@ -164,4 +164,5 @@ class SecurityConfig(
 
         return http.build()
     }
+
 }

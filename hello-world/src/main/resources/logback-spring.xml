@@ -10,7 +10,7 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/prediction.log</file>
+        <file>logs/log.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/log.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
@@ -20,7 +20,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.example.prediction" level="DEBUG" />
+    <logger name="com.example.budget_plan" level="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />

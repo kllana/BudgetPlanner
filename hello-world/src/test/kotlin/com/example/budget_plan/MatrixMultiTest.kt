@@ -8,7 +8,7 @@ import com.example.budget_plan.classes.MatrixMulti
 class MatrixMultiTest {
 
     private val multiplier = MatrixMulti();
-
+// корректность умножения двух квадратных матриц.
     @Test
     fun testCorrectMultiplier() {
         val a = arrayOf(
@@ -34,7 +34,7 @@ class MatrixMultiTest {
             }
         }
     }
-
+// умножение прямоугольных матриц.
     @Test
     fun testRectangularMatrices() {
         val a = arrayOf(
@@ -53,7 +53,7 @@ class MatrixMultiTest {
 
         assertEquals(expected[0][0], result[0][0], 0.01, "Mismatch for rectangular matrices")
     }
-
+//умножение, если одна из матриц состоит только из нулей.
     @Test
     fun testResultWithZeros() {
         val a = arrayOf(
@@ -80,7 +80,7 @@ class MatrixMultiTest {
         }
     }
 
-
+//метод выбрасывает исключение при попытке умножения несовместимых матриц.
     @Test
     fun testIncorrectMultiplier() {
         val a = arrayOf(
