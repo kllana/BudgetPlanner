@@ -1,0 +1,54 @@
+name: Maven CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Клонирование репозитория
+        uses: actions/checkout@v3
+
+      - name: Установка Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Этот шаг необходим, чтобы подготовить локальный репозиторий, например, для зависимостей
+      - name: Сборка проекта с пропуском тестов
+        run: mvn clean install -DskipTests=true
+        working-directory: hello-world
+
+      # Запуск тестов (без чистки, чтобы сохранить собранные артефакты)
+      - name: Запуск unit-тестов
+        run: mvn test -D surefire.printSummary=true -X
+        working-directory: hello-world
+
+      # Публикация артефактов в GitHub Packages
+      - name: Публикация в GitHub Packages
+        run: mvn deploy --settings .github/maven-settings.xml
+        env:
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        working-directory: hello-world
+
+      # Сохранение отчёта о тестах как артефакт workflow
+      - name: Сохранить отчёт о тестах
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: hello-world/target/surefire-reports
+
+      # Сохранение собранных артефактов (jar, war и др.)
+      - name: Сохранить собранные артефакты
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-artifacts
+          path: hello-world/target/*.jar
